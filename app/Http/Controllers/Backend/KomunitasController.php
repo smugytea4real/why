@@ -16,7 +16,8 @@ class KomunitasController extends Controller
      */
     public function index()
     {
-        return 'done';
+        $komunitas = Komunitas::all();
+        return inertia::render('Komunitas/Index', compact('komunitas'));
     }
 
     /**
