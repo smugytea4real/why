@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\KomunitasStoreRequest;
+use App\Models\komunitas;
+use Illuminate\Console\View\Components\Component;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class KomunitasController extends Controller
 {
@@ -12,7 +16,7 @@ class KomunitasController extends Controller
      */
     public function index()
     {
-        //
+        return 'done';
     }
 
     /**
@@ -20,15 +24,16 @@ class KomunitasController extends Controller
      */
     public function create()
     {
-        //
+        return inertia::render('Komunitas/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(KomunitasStoreRequest $request)
     {
-        //
+        komunitas::create($request->validated() + ['users_id' => auth()->id()]);
+        return to_route('komunitas.index');
     }
 
     /**

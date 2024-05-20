@@ -11,7 +11,7 @@ class KomunitasStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class KomunitasStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'unique:komunitas'],
+            'slug' => ['required', 'unique:komunitas'],
+            'description' => ['required', 'min:5'],
         ];
     }
 }

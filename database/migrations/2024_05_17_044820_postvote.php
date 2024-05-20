@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('postvote', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('users_id')->constrained();
             $table->foreignId('post_id')->constrained();
             $table->smallInteger('vote');
             $table->timestamps();
