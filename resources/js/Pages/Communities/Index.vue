@@ -1,10 +1,14 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
+import Pagination from '@/Components/Pagination.vue';
 
-const props = defineProps({
-  communities: Array 
-})
+defineProps({
+  communities: {
+    type: Object,
+  }
+});
 
 </script>
 
@@ -45,17 +49,21 @@ const props = defineProps({
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200 bg-white">
-                <tr v-for="communities in communities" :key="communities.id">
+                <tr v-for="communities in communities.data" :key="communities.id">
                   <td class="text-center whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ communities.name }}</td>
                   <td class="text-center whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ communities.slug }}</td>
                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                    <Link :href="route('communities.edit', communities.id)" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, Lindsay Walton</span></Link>
+                    <Link :href="route('communities.edit', communities.id)" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</Link>
+                    <Link :href="route('communities.destroy', communities.id)" class="text-red-600 hover:text-red-900" method="delete" as="button" type="button">Delete</Link>
                   </td>
                 </tr>
 
                 <!-- More people... -->
               </tbody>
             </table>
+            <div class="m-2 p-2">
+             <Pagination :links="communities.links" /> 
+          </div>
           </div>
         </div>
       </div>

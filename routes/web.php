@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Communities/Index');
     })->name('dashboard');
 
     Route::resource('communities', CommunityController::class);
