@@ -4,12 +4,12 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class KomunitasStoreRequest extends FormRequest
+class CommunityStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
@@ -19,12 +19,12 @@ class KomunitasStoreRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'name' => ['required', 'unique:komunitas'],
-            'slug' => ['required', 'unique:komunitas'],
+            'name' => ['required', 'unique:communities'],
             'description' => ['required', 'min:5'],
         ];
     }
 }
+

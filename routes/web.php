@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Backend\KomunitasController;
+use App\Http\Controllers\Backend\CommunityController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +15,6 @@ Route::get('/', function () {
     ]);
 });
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -27,7 +26,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::resource('/komunitas', controller:KomunitasController::class);
+    Route::resource('communities', CommunityController::class);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+

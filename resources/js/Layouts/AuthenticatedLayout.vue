@@ -34,10 +34,10 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                    <NavLink :href="route('komunitas.index')" :active="route().current('komunitas.index')">
-                                        Komunitas
-                                    </NavLink>
-                             </div>
+                                <NavLink :href="route('communities.index')" :active="route().current('communities.index')">
+                                    Community
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -155,3 +155,4 @@ const showingNavigationDropdown = ref(false);
         </div>
     </div>
 </template>
+

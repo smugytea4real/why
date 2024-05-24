@@ -17,17 +17,17 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('komunitas.store'));
+    form.post(route('communities.store'));
 };
 
 </script>
 
 <template>
-    <Head title="Create Comunity" />
+    <Head title="Create Community" />
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Create Comunity</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Create Community</h2>
         </template>
 
         <div class="py-12">
@@ -66,28 +66,13 @@ const submit = () => {
 
                                     <InputError class="mt-2" :message="form.errors.description" />
                                 </div>
-
-                                <div class="col-span-6 sm:col-span-3">
-                                    <InputLabel for="slug" value="Slug" />
-
-                                    <TextInput
-                                        id="slug"
-                                        type="text"
-                                        class="mt-1 block w-full"
-                                        v-model="form.slug"
-                                        required
-                                        autocomplete="slug"
-                                    />
-
-                                    <InputError class="mt-2" :message="form.errors.slug" />
-                                </div>
                             </div>
                         </div>
 
                         <div class="px-4 py-4 bg-gray-50 sm:p-6 border-t border-gray-300">
                             <div class="flex items-center justify-end">
                                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                    Register
+                                    Create
                                 </PrimaryButton>
                             </div>
                         </div>
@@ -97,3 +82,4 @@ const submit = () => {
         </div>
     </AuthenticatedLayout>
 </template>
+

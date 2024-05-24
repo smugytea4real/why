@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\KomunitasStoreRequest;
-use App\Models\komunitas;
+use App\Http\Requests\CommunityStoreRequest;
+use App\Models\Community;
 use Illuminate\Console\View\Components\Component;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class KomunitasController extends Controller
+class CommunityController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $komunitas = Komunitas::all();
-        return inertia::render('Komunitas/Index', compact('komunitas'));
+        $communities = Community::all();
+        return inertia::render('Communities/Index', compact('communities'));
     }
 
     /**
@@ -25,16 +25,16 @@ class KomunitasController extends Controller
      */
     public function create()
     {
-        return inertia::render('Komunitas/Create');
+        return inertia::render('Communities/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(KomunitasStoreRequest $request)
+    public function store(CommunityStoreRequest $request)
     {
-        komunitas::create($request->validated() + ['users_id' => auth()->id()]);
-        return to_route('komunitas.index');
+        Community::create($request->validated() + ['users_id' => auth()->id()]);
+        return to_route('communities.index');
     }
 
     /**
@@ -48,17 +48,21 @@ class KomunitasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Community $community)
     {
-        //
+        return Inertia::render('Communities/Edit', [
+            'community' => $community
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CommunityStoreRequest $request, Community $community)
     {
-        //
+        $community->update($request->validated());
+
+        return to_route(route: 'communities.index');
     }
 
     /**
@@ -69,3 +73,4 @@ class KomunitasController extends Controller
         //
     }
 }
+

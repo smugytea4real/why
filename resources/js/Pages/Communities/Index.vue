@@ -2,19 +2,18 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 
-defineProps({
-  komunitas: Object
+const props = defineProps({
+  communities: Array 
 })
-
 
 </script>
 
 <template>
-  <Head title="All Komunitas" />
+  <Head title="All Communities" />
 
   <AuthenticatedLayout>
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">All Komunitas</h2>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">All Communities</h2>
     </template>
 
     <div class="py-12">
@@ -22,12 +21,12 @@ defineProps({
         <div class="px-4 sm:px-6 lg:px-8">
           <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
-        <h1 class="text-xl font-semibold text-gray-900">Users</h1>
-        <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
+        <h1 class="text-xl font-semibold text-gray-900">Communities</h1>
+        <p class="mt-2 text-sm text-gray-700">A list of all the communities in your account including their name and slug.</p>
       </div>
       <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-        <Link :href="route('komunitas.create')">
-          <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 bg-red-600 border border-transparent text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto">Add Komunitas</button>
+        <Link :href="route('communities.create')">
+          <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 bg-red-600 border border-transparent text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto">Add Community</button>
         </Link>
       </div>
     </div>
@@ -46,11 +45,11 @@ defineProps({
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200 bg-white">
-                <tr v-for="komunitas in komunitas" :key="komunitas.id">
-                  <td class="text-center whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ komunitas.name }}</td>
-                  <td class="text-center whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ komunitas.slug }}</td>
+                <tr v-for="communities in communities" :key="communities.id">
+                  <td class="text-center whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ communities.name }}</td>
+                  <td class="text-center whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ communities.slug }}</td>
                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, Lindsay Walton</span></a>
+                    <Link :href="route('communities.edit', communities.id)" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, Lindsay Walton</span></Link>
                   </td>
                 </tr>
 
@@ -67,3 +66,4 @@ defineProps({
     </div>
   </AuthenticatedLayout>
 </template>
+
