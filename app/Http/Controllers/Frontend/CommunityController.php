@@ -13,8 +13,8 @@ class CommunityController extends Controller
     public function show($slug)
     {
         $community = Community::where('slug', $slug)->first();
-        $posts = CommunityPostResource::collection($community->posts()->paginate(12));
-        
+        $posts = CommunityPostResource::collection($community->posts()->paginate(3));
+
         return Inertia::render('Frontend/Communities/Show', compact('community', 'posts'));
     }
 }
