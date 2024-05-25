@@ -8,6 +8,7 @@ use App\Models\Community;
 use Illuminate\Console\View\Components\Component;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Http\Resources\CommunityPostResource;
 
 class CommunityController extends Controller
 {
@@ -37,18 +38,24 @@ class CommunityController extends Controller
      */
     public function store(CommunityStoreRequest $request)
     {
-        Community::create($request->validated() + ['users_id' => auth()->id()]);
-        return to_route('communities.index')->with('message', 'Community created successfully');
+        Community::create($request->validated() + ['user_id' => auth()->id()]);
+        return to_route('communities.index')->with('message', 'Community created successfully.');
+
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($slug)
     {
-        //
+        $community = Community::where('slug', $slug)->with('posts')->firstOrFail();
+        return Inertia::render('Communities/Show', [
+            'community' => $community,
+            'posts' => $community->posts,
+            'communities' => Community::all(),
+        ]);
     }
-
     /**
      * Show the form for editing the specified resource.
      */

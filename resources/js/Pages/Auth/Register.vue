@@ -6,6 +6,10 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
+defineProps({
+    errors: Object,
+});
+
 const form = useForm({
     name: '',
     username: '',
@@ -25,7 +29,9 @@ const submit = () => {
     <GuestLayout>
         <Head title="Register" />
 
-        <form @submit.prevent="submit">
+        <form 
+            @submit.prevent="submit" 
+            class="max-w-md mx-auto bg-white shadow rounded p-6">
             <div>
                 <InputLabel for="name" value="Name" />
 

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class post extends Model
+class Post extends Model
 {
     use HasFactory, Sluggable;
 
     protected $fillable = [
-        'users_id',
+        'user_id',
         'komunitas_id',
         'title',
         'url',
@@ -26,5 +26,10 @@ class post extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
