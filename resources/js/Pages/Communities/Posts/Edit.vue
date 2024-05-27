@@ -6,16 +6,20 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 const props = defineProps({
+  post:object,
     community: Object,
     errors: Object,
 });
+
 const form = useForm({
-    title: "",
-    description: "",
-    url: "",
+    title: props.post?.title,
+    description: props.post?.description,
+    url: props.post?.url,
 });
 const submit = () => {
-    form.post(route('communities.posts.store', props.community.slug));
+  form.put(
+    form.post(route('communities.posts.update', [props.community.slug, props.post.slug]))
+  );
 };
 </script>
 
@@ -76,7 +80,7 @@ const submit = () => {
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
               >
-                Store
+                Update
               </PrimaryButton>
             </div>
           </form>
