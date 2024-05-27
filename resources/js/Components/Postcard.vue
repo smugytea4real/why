@@ -35,7 +35,9 @@
             </p>
             <div class="flex m-2 p-2">
                 <p class="mr-4 p-2">Comments(2)</p>
-                <a href="#" class="
+                <Link
+                href="route('frontend.communities.posts.show', [community, post.slug])" 
+                class="
             inline-flex
             items-center
             py-2
@@ -56,13 +58,15 @@
                             d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                             clip-rule="evenodd"></path>
                     </svg>
-                </a>
+                </Link> 
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3';
+
 defineProps({
     post: Object,
     community: String,

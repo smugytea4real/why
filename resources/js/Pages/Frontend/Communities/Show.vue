@@ -30,7 +30,7 @@ defineProps({
                 v-for="post in posts.data" 
                 :key="post.id"
                 :post="post"
-                :community="community.name"/>
+                :community="community.slug"/>
                 <div class="mt-4 p-2">
                     <Pagination :links="posts.meta.links"/>
                 </div>
