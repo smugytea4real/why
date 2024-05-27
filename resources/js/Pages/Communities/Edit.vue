@@ -8,36 +8,15 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
-    community: {
-        type: Object,
-        required: true,
-    },
-    errors: {
-        type: Object,
-        required: true,
-    },
+    community: Object,
+    errors: Object,
 });
 
-// Initialize form with props data
-const form = useForm({
-    name: props.community.name ?? '',
-    description: props.community.description ?? '',
-});
+const form = useForm(props.community);
 
-// Create a ref for the name input
-const nameInput = ref(null);
-
-// Define the submit function
 const submit = () => {
-    form.put(route("communities.update", { community: props.community.id }));
+    form.put(route("communities.update", props.community.id));
 };
-
-// Set focus on the name input when the component is mounted
-onMounted(() => {
-    if (nameInput.value) {
-        nameInput.value.focus();
-    }
-});
 </script>
     
 
