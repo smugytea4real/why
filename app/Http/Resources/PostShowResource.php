@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,6 +24,7 @@ class PostShowResource extends JsonResource
             'slug' => $this->slug,
             'url' => $this->url,
             'owner' => auth()->id() == $this->user_id ? true : false, 
+            'comment'=> CommentResource::collection($this->whenLoaded(relationship:'comments'))
         ];
         
     }
