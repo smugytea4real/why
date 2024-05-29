@@ -17,6 +17,7 @@ class Post extends Model
         'url',
         'slug',
         'description',
+        'votes',
     ];
 
     public function sluggable(): array
@@ -43,5 +44,9 @@ class Post extends Model
     public function community()
     {
         return $this->belongsTo(related:Community::class);
+    }
+    public function postVotes()
+    {
+        return $this->hasMany(Postvote::class);
     }
 }
