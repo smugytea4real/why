@@ -1,9 +1,11 @@
 <script setup>
 import Guestlayout from '@/Layouts/GuestLayout.vue';
 import { Link } from '@inertiajs/vue3';
+import Postvote from '@/Components/PostVote.vue';
 
 const props = defineProps({
     community: Object,
+    post: Object,
     posts: Object,
 });
 
@@ -23,14 +25,14 @@ const submit = () => {
     <Guestlayout>
         <section class="flex flex-col md:flex-row m-2 p-2">
             <div class="w-full md:w-8/12">
-                <div class="m-2 p-2 bg-white">  
+                <div class="mx-2 p-2 bg-white rounded-lg">  
                     <h2 class="font-semibold text-2xl text-black">
                         <Link :href="route('frontend.communities.show', community.slug)">
                             r/{{ community.name }}
                         </Link>
                     </h2>
                 </div>
-                <div class="flex m-2 bg-white text-sm text-slate-400">
+                <div class="flex m-2 bg-white rounded-lg text-sm text-slate-400">
                     <div>
                         <PostVote :post="post.data" />
                     </div>
@@ -86,10 +88,10 @@ const submit = () => {
                     </div>
                 </div>
             </div>
-            <div class="w-full md:w-4/12 p-4">
-                <div class="m-2 p-2 bg-slate-500 text-white">
-                    <h2>Latests Communities</h2>
-                </div>
+            <div class="w-full md:w-4/12">
+                   <PostList :posts="posts.data" :community="community">
+                    <template #title>Popular Posts</template>
+                </PostList>
             </div>
         </section>
     </Guestlayout>

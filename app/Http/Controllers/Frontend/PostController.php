@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use App\Http\Resources\PostShowResource;
 use App\Models\Community;
 use App\Models\Post;
@@ -16,6 +17,7 @@ class PostController extends Controller
         $community = Community::where('slug', $comunity_slug)->first();
         $post = new PostShowResource(Post::with('comments')->where('slug', $slug)->first());
 
-        return inertia::render('Frontend/Posts/Show', compact('community', 'post'));
+        $posts = PostResource::collection($community->posts()->orderBy('votes', 'desc')->take(6)->get());
+        return inertia::render('Frontend/Posts/Show', compact('community', 'post', 'posts'));
     }
 }

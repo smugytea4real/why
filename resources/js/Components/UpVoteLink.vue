@@ -1,5 +1,5 @@
 <template>
-    <Link :href="route('posts.up    Vote', slug)" method="post" as="button" type="button"
+    <Link :href="route('posts.upVote', slug)" method="post" as="button" type="button"
         class="text-gray-400 hover:text-blue-400 flex justify-center my-2" preserve-scroll>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="h-6 w-6">
@@ -9,9 +9,9 @@
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/inertia-vue3';
 
 defineProps({
     slug: String,
-})
+});
 </script>
